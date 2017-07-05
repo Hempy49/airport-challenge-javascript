@@ -1,6 +1,6 @@
 function Weather() {
-this.forecast = 'stormy'
+this.forecast = ['stormy', 'calm']
 }
 Weather.prototype.change = function() {
-this.forecast = ['stormy', 'calm'].sample
+return this.forecast[Math.floor (Math.random() * this.forecast.length)]
 }

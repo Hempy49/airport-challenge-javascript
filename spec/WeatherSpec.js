@@ -4,10 +4,16 @@ describe("Weather", function() {
   beforeEach(function() {
     weather = new Weather();
     plane = new Plane();
-    airport = new Weather();
+
   });
 
   it("should be stormy", function() {
-    expect(weather.forecast).toEqual('stormy')
+    weather.forecast = ['stormy', 'stormy'];
+    expect(weather.change()).toEqual('stormy')
+  });
+
+  it("should be calm", function() {
+    weather.forecast = ['calm', 'calm'];
+    expect(weather.change()).toEqual('calm')
   });
 });
