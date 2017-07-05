@@ -43,5 +43,9 @@ describe("Airport", function() {
     it("throws an error on attempted landing", function() {
       expect(function() { airport.land(planeMock) }).toThrowError();
     });
+
+  it("throws an error on attemted take off", function() {
+    expect(function() { airport.takeOff(planeMock) }).toThrowError();
+    });
   });
 });
