@@ -3,17 +3,17 @@ describe("Weather", function() {
 
   beforeEach(function() {
     weather = new Weather();
-    plane = new Plane();
-
   });
 
-  it("should be stormy", function() {
-    weather.forecast = ['stormy', 'stormy'];
-    expect(weather.change()).toEqual('stormy')
-  });
+  describe("#change", function() {
+    it("should be stormy", function() {
+      weather.forecast = ['stormy', 'stormy'];
+      expect(weather.change()).toEqual('stormy')
+    });
 
-  it("should be calm", function() {
-    weather.forecast = ['calm', 'calm'];
-    expect(weather.change()).toEqual('calm')
+    it("should be calm", function() {
+      weather.forecast = ['calm', 'calm'];
+      expect(weather.change()).toEqual('calm')
+    });
   });
 });

@@ -1,23 +1,25 @@
 describe("Plane", function() {
-  var plane;
+  var plane, airportMock;
 
   beforeEach(function() {
-    plane = new Plane;
-    airport = new Airport;
+    plane = new Plane();
   });
 
   it("should start in the air", function() {
     expect(plane.isFlying).toEqual(true);
   });
 
-  it("should not be flying when it is landed", function() {
-    airport.land(plane)
-    expect(plane.isFlying).toEqual(false)
+  describe("#land", function() {
+    it("should not be flying when it is landed", function() {
+      plane.land();
+      expect(plane.isFlying).toEqual(false)
+    });
   });
 
-  it("should be flying when it has taken off", function() {
-    airport.land(plane)
-    airport.takeOff(plane)
-    expect(plane.isFlying).toEqual(true)
+  describe("#fly", function() {
+    it("should be flying when it has taken off", function() {
+      plane.fly();
+      expect(plane.isFlying).toEqual(true)
+    });
   });
 });

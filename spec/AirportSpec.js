@@ -1,27 +1,47 @@
 describe("Airport", function() {
-  var airport;
+  var airport, planeMock, weatherMock;
 
   beforeEach(function() {
-    airport = new Airport();
-    plane = new Plane();
+    planeMock = jasmine.createSpyObj('plane', ['land', 'fly']);
+    weatherMock = jasmine.createSpyObj('weather', ['change'])
+    airport = new Airport(weatherMock);
+
+    weatherMock.change.and.returnValue('calm')
+    planeMock.land.and.returnValue(null);
+    planeMock.fly.and.returnValue(null);
   });
 
   it("should start with no planes", function() {
     expect(airport.planes).toEqual([]);
   });
 
+
   it("should have a default capacity", function() {
     expect(airport.capacity).toEqual(30);
   });
 
-  it("should be able to land a plane", function() {
-    airport.land(plane)
-    expect(airport.planes).not.toBe([]);
+  describe("Take off and landing", function() {
+    beforeEach(function() {
+      airport.land(planeMock);
+    });
+
+    it("should be able to land a plane", function() {
+      expect(airport.planes).not.toBe([]);
+    });
+
+    it("should be able to take off a plane", function() {
+      airport.takeOff(planeMock)
+      expect(airport.planes).not.toContain(planeMock)
+    });
   });
 
-  it("should be able to take off a plane", function() {
-    airport.land(plane)
-    airport.takeOff(plane)
-    expect(airport.planes).not.toContain(Plane)
+  describe("Bad weather", function() {
+    beforeEach(function() {
+      weatherMock.change.and.returnValue('stormy')
+    });
+
+    it("throws an error on attempted landing", function() {
+      expect(function() { airport.land(planeMock) }).toThrowError();
+    });
   });
 });
